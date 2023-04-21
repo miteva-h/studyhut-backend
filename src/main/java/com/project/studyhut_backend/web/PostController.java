@@ -20,13 +20,10 @@ public class PostController {
     @PostMapping("/create")
     public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto) {
         Post createdPost = postService.createPost(postDto.getKeywords(), postDto.getTitle(), postDto.getNotes(), postDto.getDateTime(), postDto.getCourse(), postDto.getUsername());
-
         if (createdPost == null) {
             return ResponseEntity.badRequest().build();
         }
-
         PostDto createdPostDto = convertToDto(createdPost);
-
         return ResponseEntity.ok().body(createdPostDto);
     }
 
