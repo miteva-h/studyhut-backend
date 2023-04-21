@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
@@ -19,6 +21,17 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
+
+    @Override
+    public User findById(Integer id) {
+        return this.userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+    }
+
+    @Override
+    public User findByUsername(String username){
+        return this.userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
+    }
+
     @Override
     public User login(String username, String password) {
         if (username==null || username.isEmpty() || password==null || password.isEmpty()) {
@@ -27,6 +40,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByUsernameAndPassword(username,
                 password).orElseThrow(InvalidUserCredentialsException::new);
     }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return (UserDetails) userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException(username));

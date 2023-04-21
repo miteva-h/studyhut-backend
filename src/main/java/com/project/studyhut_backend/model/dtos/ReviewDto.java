@@ -9,20 +9,20 @@ public class ReviewDto {
     private LocalDateTime dateTimeCreated;
     private String reviewText;
     private int rating;
-    private String username;
-    private String post;
+    private Integer userId;
+    private Integer postId;
 
     public ReviewDto(){}
 
     public ReviewDto(LocalDateTime dateTimeCreated,
                      String reviewText,
                      int rating,
-                     String username,
-                     String post){
+                     Integer userId,
+                     Integer postId){
         this.dateTimeCreated=dateTimeCreated;
         this.reviewText=reviewText;
         this.rating=rating;
-        this.username=username;
-        this.post=post;
+        this.userId=userId;
+        this.postId=postId;
     }
 }

@@ -12,15 +12,14 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepository reviewRepository;
-    private final PostRepository postRepository;
 
     public ReviewServiceImpl(ReviewRepository reviewRepository, PostRepository postRepository) {
         this.reviewRepository = reviewRepository;
-        this.postRepository = postRepository;
     }
 
     @Override
@@ -29,8 +28,9 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public Review createReview(LocalDateTime dateTimeCreated, String reviewText, int rating, User user, Post post) {
+    public Optional<Review> createReview(LocalDateTime dateTimeCreated, String reviewText, int rating, User user, Post post) {
         Review review = new Review(dateTimeCreated, reviewText, rating, user, post);
-        return this.reviewRepository.save(review);
+        this.reviewRepository.save(review);
+        return Optional.of(review);
     }
 }
