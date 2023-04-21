@@ -13,7 +13,8 @@ public class Course {
     private String name;
     private File picture;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+//    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<Category> categories;
 
     public Course() {

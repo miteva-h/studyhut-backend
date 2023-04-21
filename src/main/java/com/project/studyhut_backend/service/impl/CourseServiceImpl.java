@@ -33,6 +33,6 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public List<Course> filterByCategory(List<Category> categories) {
-        return courseRepository.findCoursesByCategories(categories);
+        return courseRepository.findByCategoriesIn(categories);
     }
 }

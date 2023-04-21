@@ -9,5 +9,6 @@ import java.util.List;
 
 @Repository
 public interface CourseRepository extends JpaRepository<Course,Integer> {
-    List<Course> findCoursesByCategories(List<Category> categories);
+    List<Course> findByCategoriesIn(List<Category> categories);
+    List<Course> findAll();
 }
