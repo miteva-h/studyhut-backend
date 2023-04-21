@@ -3,6 +3,8 @@ package com.project.studyhut_backend.web;
 
 import com.project.studyhut_backend.model.Post;
 import com.project.studyhut_backend.model.dtos.PostDto;
+import com.project.studyhut_backend.service.PostService;
+import com.project.studyhut_backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,23 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/posts")
 public class PostController {
     private final PostService postService;
-
-    public PostController(PostService postService){
-        this.postService=postService;
-    }
+    private final UserService userService;
 
     @PostMapping("/create")
     public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto) {
-        Post post = new Post();
-        post.setKeywords(postDto.getKeywords());
-        post.setTitle(postDto.getTitle());
-        post.setNotes(postDto.getNotes());
-        post.setDateTime(postDto.getDateTime());
-        post.setCourse(postDto.getCourse());
-        post.setUser(postDto.getUsername());
-
-        Post createdPost = postService.createPost(post);
-
+        Post createdPost = postService.createPost(postDto.getKeywords(), postDto.getTitle(), postDto.getNotes(), postDto.getDateTime(), postDto.getCourse(), postDto.getUsername());
+        
         if (createdPost == null) {
             return ResponseEntity.badRequest().build();
         }
