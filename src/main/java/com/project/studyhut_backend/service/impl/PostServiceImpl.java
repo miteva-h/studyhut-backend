@@ -10,7 +10,9 @@ import com.project.studyhut_backend.repository.PostRepository;
 import com.project.studyhut_backend.service.PostService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -34,8 +36,10 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post createPost(String keywords, String title, String notes, LocalDateTime dateTime, Course course, User user) {
-        Post post = new Post(keywords, title, notes, dateTime, course, user);
+    public Post createPost(String keywords, String title, String notes, String dateTime, Course course, User user) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss.SSS");
+        LocalDateTime localDateFrom = LocalDateTime.parse(dateTime, formatter);
+        Post post = new Post(keywords, title, notes, localDateFrom, course, user);
         return this.postRepository.save(post);
     }
 

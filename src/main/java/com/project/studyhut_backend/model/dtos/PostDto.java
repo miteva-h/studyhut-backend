@@ -11,13 +11,13 @@ public class PostDto {
     private String keywords;
     private String title;
     private String notes;
-    private LocalDateTime dateTime;
+    private String dateTime;
     private Course course;
     private User username;
 
     public PostDto(){}
 
-    public PostDto(String keywords, String title, String notes, LocalDateTime dateTime, Course course, User username){
+    public PostDto(String keywords, String title, String notes, String dateTime, Course course, User username){
         this.keywords=keywords;
         this.title=title;
         this.notes=notes;

@@ -12,7 +12,7 @@ import java.util.List;
 public interface PostService {
     Post findById(Integer id);
     List<Post> listAllPosts();
-    Post createPost(String keywords, String title, String notes, LocalDateTime dateTime, Course course, User user);
+    Post createPost(String keywords, String title, String notes, String dateTime, Course course, User user);
     List<Post> searchByCourse(Integer courseId);
     List<Post> searchByKeywords(String keywords);
 }

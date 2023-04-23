@@ -29,7 +29,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Course createCourse(String name, File picture, List<Category> categories) {
+    public Course createCourse(String name, String picture, List<Category> categories) {
         Course course = new Course(name, picture, categories);
         return courseRepository.save(course);
     }
@@ -43,7 +43,7 @@ public class CourseServiceImpl implements CourseService {
     public Optional<Course> editCourse(Integer id, CourseDto courseDto) {
         Course course = this.courseRepository.findById(id).orElseThrow(CourseNotFoundException::new);
         course.setName(courseDto.getName());
-        course.setPicture(new File(courseDto.getPicture()));
+        course.setPicture(courseDto.getPicture());
         course.setCategories(courseDto.getCategories());
         this.courseRepository.save(course);
         return Optional.of(course);
