@@ -54,12 +54,12 @@ public class PostController {
     }
 
     @GetMapping("/searchByCourse")
-    public List<Post> searchByCourse(@RequestBody Integer courseId) {
+    public List<Post> searchByCourse(@RequestParam Integer courseId) {
         return this.postService.searchByCourse(courseId);
     }
 
     @GetMapping("/searchByKeywords")
-    public List<Post> searchByKeywords(@RequestBody String keywords) {
+    public List<Post> searchByKeywords(@RequestParam String keywords) {
         return this.postService.searchByKeywords(keywords);
     }
 }
