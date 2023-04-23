@@ -21,6 +21,8 @@ public class CourseController {
         return this.courseService.listAllCourses();
     }
 
+
+
     @PutMapping("/{id}/edit")
     public ResponseEntity<Course> editCourse(@PathVariable Integer id, @RequestBody CourseDto courseDto) {
         return this.courseService.editCourse(id, courseDto)

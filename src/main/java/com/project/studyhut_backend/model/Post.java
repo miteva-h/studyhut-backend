@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 public class Post {
@@ -59,12 +60,14 @@ public class Post {
         this.notes = notes;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public String getDateTime() {
+        return this.dateTime.toString();
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setDateTime(String dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss");
+        LocalDateTime localDateFrom = LocalDateTime.parse(dateTime, formatter);
+        this.dateTime = localDateFrom;
     }
 
     public Course getCourse() {

@@ -11,7 +11,7 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer courseID;
     private String name;
-    private File picture;
+    private String picture;
 
 //    @ManyToMany(fetch = FetchType.EAGER)
     @ManyToMany
@@ -20,7 +20,7 @@ public class Course {
     public Course() {
     }
 
-    public Course(String name, File picture, List<Category> categories) {
+    public Course(String name, String picture, List<Category> categories) {
         this.name = name;
         this.picture = picture;
         this.categories = categories;
@@ -34,7 +34,7 @@ public class Course {
         return name;
     }
 
-    public File getPicture() {
+    public String getPicture() {
         return picture;
     }
 
@@ -46,7 +46,7 @@ public class Course {
         this.name = name;
     }
 
-    public void setPicture(File picture) {
+    public void setPicture(String picture) {
         this.picture = picture;
     }
 
