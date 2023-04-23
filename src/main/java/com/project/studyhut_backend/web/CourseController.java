@@ -1,7 +1,6 @@
 package com.project.studyhut_backend.web;
 
-import com.project.studyhut_backend.model.Category;
-import com.project.studyhut_backend.model.Course;
+import com.project.studyhut_backend.model.*;
 import com.project.studyhut_backend.model.dtos.CourseDto;
 import com.project.studyhut_backend.service.CourseService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,12 @@ public class CourseController {
         return this.courseService.listAllCourses();
     }
 
-
+    @PostMapping("/create")
+    public ResponseEntity<Course> createReview(@RequestBody CourseDto courseDto) {
+        return this.courseService.createCourse(courseDto.getName(), courseDto.getPicture(), courseDto.getCategoryIds())
+                .map(review -> ResponseEntity.ok().body(review))
+                .orElseGet(() -> ResponseEntity.badRequest().build());
+    }
 
     @PutMapping("/{id}/edit")
     public ResponseEntity<Course> editCourse(@PathVariable Integer id, @RequestBody CourseDto courseDto) {
@@ -38,7 +42,7 @@ public class CourseController {
     }
 
     @GetMapping("/filter")
-    public List<Course> filterByCategories(@RequestBody List<Category> categories) {
+    public List<Course> filterByCategories(@RequestParam List<Integer> categories) {
         return this.courseService.filterByCategory(categories);
     }
 }

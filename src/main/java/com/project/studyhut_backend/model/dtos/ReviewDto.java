@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class ReviewDto {
-    private LocalDateTime dateTimeCreated;
+    private String dateTimeCreated;
     private String reviewText;
     private int rating;
     private Integer userId;
@@ -14,7 +14,7 @@ public class ReviewDto {
 
     public ReviewDto(){}
 
-    public ReviewDto(LocalDateTime dateTimeCreated,
+    public ReviewDto(String dateTimeCreated,
                      String reviewText,
                      int rating,
                      Integer userId,

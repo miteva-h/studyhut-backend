@@ -9,13 +9,13 @@ import java.util.List;
 public class CourseDto {
     private String name;
     private String picture;
-    private List<Category> categories;
+    private List<Integer> categoryIds;
 
     public CourseDto(){}
 
-    public CourseDto(String name, String picture, List<Category> categories){
+    public CourseDto(String name, String picture, List<Integer> categoryIds){
         this.name=name;
         this.picture=picture;
-        this.categories=categories;
+        this.categoryIds=categoryIds;
     }
 }
