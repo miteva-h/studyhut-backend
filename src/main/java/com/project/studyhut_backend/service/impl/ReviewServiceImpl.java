@@ -11,6 +11,7 @@ import com.project.studyhut_backend.service.ReviewService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,8 +29,10 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public Optional<Review> createReview(LocalDateTime dateTimeCreated, String reviewText, int rating, User user, Post post) {
-        Review review = new Review(dateTimeCreated, reviewText, rating, user, post);
+    public Optional<Review> createReview(String dateTimeCreated, String reviewText, int rating, User user, Post post) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss.SSS");
+        LocalDateTime parsedDateTime = LocalDateTime.parse(dateTimeCreated, formatter);
+        Review review = new Review(parsedDateTime, reviewText, rating, user, post);
         this.reviewRepository.save(review);
         return Optional.of(review);
     }

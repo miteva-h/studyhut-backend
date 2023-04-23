@@ -12,5 +12,5 @@ import java.util.Optional;
 
 public interface ReviewService {
     List<Review> listAllReviewsInPost(Post post);
-    Optional<Review> createReview(LocalDateTime dateTimeCreated, String reviewText, int rating, User user, Post post);
+    Optional<Review> createReview(String dateTimeCreated, String reviewText, int rating, User user, Post post);
 }

@@ -21,9 +21,9 @@ public class CourseController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Course> createReview(@RequestBody CourseDto courseDto) {
+    public ResponseEntity<Course> createCourse(@RequestBody CourseDto courseDto) {
         return this.courseService.createCourse(courseDto.getName(), courseDto.getPicture(), courseDto.getCategoryIds())
-                .map(review -> ResponseEntity.ok().body(review))
+                .map(course -> ResponseEntity.ok().body(course))
                 .orElseGet(() -> ResponseEntity.badRequest().build());
     }
 

@@ -28,7 +28,7 @@ public class PostController {
 
     @PostMapping("/create")
     public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto) {
-        Post createdPost = postService.createPost(postDto.getKeywords(), postDto.getTitle(), postDto.getNotes(), postDto.getDateTime(), postDto.getCourse(), postDto.getUsername());
+        Post createdPost = postService.createPost(postDto.getKeywords(), postDto.getTitle(), postDto.getNotes(), postDto.getDateTime(), postDto.getCourseId(), postDto.getUserId());
         if (createdPost == null) {
             return ResponseEntity.badRequest().build();
         }
@@ -42,8 +42,8 @@ public class PostController {
         postDto.setTitle(post.getTitle());
         postDto.setNotes(post.getNotes());
         postDto.setDateTime(post.getDateTime());
-        postDto.setCourse(post.getCourse());
-        postDto.setUsername(post.getUser());
+        postDto.setCourseId(post.getCourse().getCourseID());
+        postDto.setUserId(post.getUser().getUserID());
         return postDto;
     }
 

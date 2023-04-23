@@ -25,12 +25,12 @@ public class ReviewController {
     private final UserService userService;
     private final PostService postService;
 
-//    @PostMapping("/create")
-//    public ResponseEntity<Review> createReview(@RequestBody ReviewDto reviewDto) {
-//        User user = this.userService.findById(reviewDto.getUserId());
-//        Post post = this.postService.findById(reviewDto.getPostId());
-//        return this.reviewService.createReview(reviewDto.getDateTimeCreated(), reviewDto.getReviewText(), reviewDto.getRating(), user, post)
-//                .map(review -> ResponseEntity.ok().body(review))
-//                .orElseGet(() -> ResponseEntity.badRequest().build());
-//    }
+    @PostMapping("/create")
+    public ResponseEntity<Review> createReview(@RequestBody ReviewDto reviewDto) {
+        User user = this.userService.findById(reviewDto.getUserId());
+        Post post = this.postService.findById(reviewDto.getPostId());
+        return this.reviewService.createReview(reviewDto.getDateTimeCreated(), reviewDto.getReviewText(), reviewDto.getRating(), user, post)
+                .map(review -> ResponseEntity.ok().body(review))
+                .orElseGet(() -> ResponseEntity.badRequest().build());
+    }
 }

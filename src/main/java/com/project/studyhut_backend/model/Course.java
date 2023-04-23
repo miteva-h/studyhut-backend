@@ -13,12 +13,23 @@ public class Course {
     private String name;
     private String picture;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-    @ManyToMany(cascade = CascadeType.ALL)
+    //    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+    @JoinTable(name = "courses_categories",
+            joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories;
 
     public Course() {
     }
+
+//    @PreRemove
+//    private void removeCategories() {
+//        for (Category category : categories) {
+//            category.getCourses().remove(this);
+//        }
+//        categories.clear();
+//    }
 
     public Course(String name, String picture, List<Category> categories) {
         this.name = name;
