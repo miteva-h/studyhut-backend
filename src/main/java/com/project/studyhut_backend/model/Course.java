@@ -14,7 +14,7 @@ public class Course {
     private String picture;
 
 //    @ManyToMany(fetch = FetchType.EAGER)
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Category> categories;
 
     public Course() {
