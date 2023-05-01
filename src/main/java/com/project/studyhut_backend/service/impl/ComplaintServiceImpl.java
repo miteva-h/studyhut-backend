@@ -24,8 +24,8 @@ public class ComplaintServiceImpl implements ComplaintService {
     }
 
     @Override
-    public Complaint createComplaint(LocalDateTime dateTimeCreated, String content, User user) {
-        Complaint complaint = new Complaint(dateTimeCreated, content, false, user);
+    public Complaint createComplaint(String content, User user) {
+        Complaint complaint = new Complaint(LocalDateTime.now(), content, false, user);
         return this.complaintRepository.save(complaint);
     }
 

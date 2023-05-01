@@ -31,7 +31,7 @@ public class ComplaintController {
     public ResponseEntity<List<ComplaintDto>> getAllComplaints() {
         List<Complaint> complaints = complaintService.listAllComplaints();
         List<ComplaintDto> complaintDtos = complaints.stream()
-                .map(complaint -> convertToDto(complaint))
+                .map(this::convertToDto)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(complaintDtos);
     }
@@ -39,23 +39,20 @@ public class ComplaintController {
     @PostMapping("/createComplaint")
     public ResponseEntity<ComplaintDto> createComplaint(@RequestBody ComplaintDto complaintDto) {
         User username = complaintDto.getUsername();
-        LocalDateTime dateTimeCreated = LocalDateTime.now();
-        Complaint complaint = complaintService.createComplaint(dateTimeCreated, complaintDto.getContent(), username);
+        Complaint complaint = complaintService.createComplaint(complaintDto.getContent(), username);
         ComplaintDto createdComplaintDto = convertToDto(complaint);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdComplaintDto);
     }
 
     @DeleteMapping("/{id}/delete")
-    public ResponseEntity<Void> closeComplaint(@PathVariable Integer complaintID) {
-        complaintService.closeComplaint(complaintID);
+    public ResponseEntity<Void> closeComplaint(@PathVariable Integer id) {
+        complaintService.closeComplaint(id);
         return ResponseEntity.noContent().build();
     }
 
     private ComplaintDto convertToDto(Complaint complaint) {
         ComplaintDto complaintDto = new ComplaintDto();
-        complaintDto.setDateTimeCreated(complaint.getDateTimeCreated());
         complaintDto.setContent(complaint.getContent());
-        complaintDto.setSolved(complaint.isSolved());
         complaintDto.setUsername(complaint.getUser());
         return complaintDto;
     }
