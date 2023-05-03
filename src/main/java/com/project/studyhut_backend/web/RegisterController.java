@@ -7,10 +7,7 @@ import com.project.studyhut_backend.model.dtos.UserDto;
 import com.project.studyhut_backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,12 +15,28 @@ import org.springframework.web.bind.annotation.RestController;
 public class RegisterController {
     private final UserService userService;
 
+//    @PostMapping
+//    public ResponseEntity<UserDto> register(@RequestBody RegistrationForm registrationForm) {
+//        User user = userService.register(registrationForm.getEmail(), registrationForm.getUsername(),
+//                registrationForm.getName(), registrationForm.getPassword(), registrationForm.getRepeatPassword(),
+//                registrationForm.getRole());
+//        UserDto userDto = UserMapper.INSTANCE.toDto(user);
+//        return ResponseEntity.ok(userDto);
+//    }
+
     @PostMapping
-    public ResponseEntity<UserDto> register(@RequestBody RegistrationForm registrationForm) {
+    public ResponseEntity<UserDto> create(@RequestBody RegistrationForm registrationForm) {
         User user = userService.register(registrationForm.getEmail(), registrationForm.getUsername(),
-                registrationForm.getPassword(), registrationForm.getRepeatPassword(), registrationForm.getName(),
+                registrationForm.getName(), registrationForm.getPassword(), registrationForm.getRepeatPassword(),
                 registrationForm.getRole());
-        UserDto userDto = UserMapper.INSTANCE.toDto(user);
+        UserDto userDto = this.userService.getUser(user.getUserID());
+        return ResponseEntity.ok(userDto);
+    }
+
+    // update it with UserDto
+    @GetMapping("/get/{id}")
+    public ResponseEntity<UserDto> getUser(@PathVariable Integer id){
+        UserDto userDto = this.userService.getUser(id);
         return ResponseEntity.ok(userDto);
     }
 }
