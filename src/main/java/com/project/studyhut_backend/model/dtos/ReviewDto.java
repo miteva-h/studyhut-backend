@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class ReviewDto {
     private String dateTimeCreated;
     private String reviewText;
-    private int rating;
+    private Integer rating;
     private Integer userId;
     private Integer postId;
 
@@ -16,7 +16,7 @@ public class ReviewDto {
 
     public ReviewDto(String dateTimeCreated,
                      String reviewText,
-                     int rating,
+                     Integer rating,
                      Integer userId,
                      Integer postId){
         this.dateTimeCreated=dateTimeCreated;

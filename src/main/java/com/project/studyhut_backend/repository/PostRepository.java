@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface PostRepository extends JpaRepository<Post,Integer> {
     List<Post> findByCourse(Course course);
-    List<Post> findByKeywords(String keywords);
+    List<Post> findByKeywordsLikeAndCourse_CourseID(String keywords, Integer courseId);
 }

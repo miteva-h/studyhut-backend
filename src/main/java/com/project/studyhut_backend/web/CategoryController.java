@@ -63,6 +63,7 @@ public class CategoryController {
     private CategoryDto convertToDto(Category category) {
         CategoryDto categoryDto = new CategoryDto();
         categoryDto.setName(category.getName());
+        categoryDto.setId(category.getCategoryID());
         return categoryDto;
     }
 }

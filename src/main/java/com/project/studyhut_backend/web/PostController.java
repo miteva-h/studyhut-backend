@@ -59,7 +59,7 @@ public class PostController {
     }
 
     @GetMapping("/searchByKeywords")
-    public List<Post> searchByKeywords(@RequestParam String keywords) {
-        return this.postService.searchByKeywords(keywords);
+    public List<Post> searchByKeywords(@RequestParam String keywords, @RequestParam Integer courseId) {
+        return this.postService.searchByKeywords(keywords, courseId);
     }
 }

@@ -14,5 +14,5 @@ public interface PostService {
     List<Post> listAllPosts();
     Post createPost(String keywords, String title, String notes, String dateTime, Integer courseId, Integer userId);
     List<Post> searchByCourse(Integer courseId);
-    List<Post> searchByKeywords(String keywords);
+    List<Post> searchByKeywords(String keywords, Integer courseId);
 }

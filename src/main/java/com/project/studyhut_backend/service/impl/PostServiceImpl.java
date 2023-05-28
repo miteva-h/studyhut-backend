@@ -56,7 +56,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> searchByKeywords(String keywords) {
-        return this.postRepository.findByKeywords(keywords);
+    public List<Post> searchByKeywords(String keywords, Integer courseId) {
+        keywords = "%" + keywords + "%";
+        return this.postRepository.findByKeywordsLikeAndCourse_CourseID(keywords, courseId);
     }
 }
